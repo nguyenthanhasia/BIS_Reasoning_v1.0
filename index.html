@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIS Reasoning 1.0 - Japanese Benchmark for Belief-Inconsistent Syllogistic Reasoning</title>
+    <meta name="description" content="The first large-scale Japanese dataset for evaluating belief-inconsistent syllogistic reasoning in large language models">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>BIS Reasoning 1.0</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#abstract" class="nav-link">Abstract</a></li>
+                <li><a href="#dataset" class="nav-link">Dataset</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    BIS Reasoning 1.0
+                    <span class="hero-subtitle">The First Large-Scale Japanese Benchmark for Belief-Inconsistent Syllogistic Reasoning</span>
+                </h1>
+                <p class="hero-description">
+                    Evaluating the logical reasoning capabilities of Large Language Models when faced with conclusions that contradict common beliefs
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="5000">0</span>
+                        <span class="stat-label">Syllogistic Problems</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="8">0</span>
+                        <span class="stat-label">LLMs Evaluated</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="46">0</span>
+                        <span class="stat-label">Semantic Categories</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#dataset" class="btn btn-primary">Explore Dataset</a>
+                    <a href="#results" class="btn btn-secondary">View Results</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="syllogism-example">
+                    <div class="premise">
+                        <span class="premise-label">Premise 1:</span>
+                        <span class="premise-text">All charcoal is processed biomass fuel</span>
+                    </div>
+                    <div class="premise">
+                        <span class="premise-label">Premise 2:</span>
+                        <span class="premise-text">All ceramics are charcoal</span>
+                    </div>
+                    <div class="conclusion">
+                        <span class="conclusion-label">Conclusion:</span>
+                        <span class="conclusion-text">All ceramics are processed biomass fuel</span>
+                        <span class="validity-badge">Logically Valid</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section id="abstract" class="abstract">
+        <div class="container">
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract-content">
+                <p class="abstract-text">
+                    We present <strong>BIS Reasoning 1.0</strong>, the first large-scale Japanese dataset of syllogistic reasoning problems explicitly designed to evaluate belief-inconsistent reasoning in large language models (LLMs). Unlike prior datasets such as NeuBAROCO and JFLD, which focus on general or belief-aligned reasoning, BIS introduces logically valid yet belief-inconsistent syllogisms to uncover reasoning biases in LLMs trained on human-aligned corpora.
+                </p>
+                <p class="abstract-text">
+                    We benchmark state-of-the-art models—including GPT models, Claude models, and leading Japanese LLMs—revealing significant variance in performance, with GPT-4o achieving 79.54% accuracy. Our analysis identifies critical weaknesses in current LLMs when handling logically valid but belief-conflicting inputs.
+                </p>
+                <div class="key-contributions">
+                    <h3>Key Contributions</h3>
+                    <div class="contributions-grid">
+                        <div class="contribution-item">
+                            <div class="contribution-icon">📊</div>
+                            <h4>First Japanese Benchmark</h4>
+                            <p>5,000 carefully curated belief-inconsistent syllogisms in Japanese</p>
+                        </div>
+                        <div class="contribution-item">
+                            <div class="contribution-icon">🤖</div>
+                            <h4>Comprehensive Evaluation</h4>
+                            <p>Systematic comparison of 8 state-of-the-art LLMs</p>
+                        </div>
+                        <div class="contribution-item">
+                            <div class="contribution-icon">🔍</div>
+                            <h4>Bias Analysis</h4>
+                            <p>Detailed investigation of reasoning biases and failure modes</p>
+                        </div>
+                        <div class="contribution-item">
+                            <div class="contribution-icon">⚕️</div>
+                            <h4>Real-world Implications</h4>
+                            <p>Critical insights for high-stakes applications</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dataset Section -->
+    <section id="dataset" class="dataset">
+        <div class="container">
+            <h2 class="section-title">Dataset Overview</h2>
+            <div class="dataset-content">
+                <div class="dataset-description">
+                    <h3>BIS Dataset Construction</h3>
+                    <p>
+                        The BIS dataset consists of 5,000 carefully constructed syllogistic reasoning problems designed to test the robustness of logical inference in LLMs under conditions of belief inconsistency. Each example comprises two premises and one conclusion that is strictly entailed by syllogistic rules, but deliberately conflicts with general knowledge.
+                    </p>
+                </div>
+                
+                <div class="example-section">
+                    <h3>Example from Dataset</h3>
+                    <div class="example-container">
+                        <img src="example.png" alt="Example syllogism from BIS dataset" class="example-image">
+                        <div class="example-explanation">
+                            <p>This example illustrates a belief-inconsistent syllogism where the conclusion is logically valid but contradicts common real-world beliefs about ceramics and biomass fuel.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="categories-section">
+                    <h3>Dataset Categories</h3>
+                    <div class="categories-visual">
+                        <img src="combined_analysis.png" alt="Dataset category analysis" class="categories-image">
+                        <div class="categories-description">
+                            <p>The dataset covers 46 distinct semantic categories, consolidated into 10 broader final categories including Human/Body/Senses, Animals/Organisms, Structure/Logic, and Natural Phenomena/Matter.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results">
+        <div class="container">
+            <h2 class="section-title">Results & Analysis</h2>
+            
+            <div class="results-overview">
+                <h3>Model Performance Overview</h3>
+                <div class="performance-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>BIS Accuracy (%)</th>
+                                <th>NeuBAROCO Accuracy (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="top-performer">
+                                <td>GPT-4o</td>
+                                <td>79.54</td>
+                                <td>94.01</td>
+                            </tr>
+                            <tr>
+                                <td>llm-jp-3-13b</td>
+                                <td>59.86</td>
+                                <td>67.66</td>
+                            </tr>
+                            <tr>
+                                <td>GPT-4-turbo</td>
+                                <td>59.48</td>
+                                <td>67.66</td>
+                            </tr>
+                            <tr>
+                                <td>llm-jp-3-13b-instruct3</td>
+                                <td>40.90</td>
+                                <td>38.32</td>
+                            </tr>
+                            <tr>
+                                <td>stockmark-13b</td>
+                                <td>40.34</td>
+                                <td>47.90</td>
+                            </tr>
+                            <tr>
+                                <td>Claude-3-sonnet</td>
+                                <td>20.34</td>
+                                <td>78.44</td>
+                            </tr>
+                            <tr>
+                                <td>Claude-3-opus</td>
+                                <td>7.18</td>
+                                <td>61.07</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="prompt-analysis">
+                <h3>Prompt Engineering Analysis</h3>
+                <div class="prompt-charts">
+                    <div class="chart-container">
+                        <h4>Japanese Prompts - Error Recovery Rate</h4>
+                        <img src="accuracy.png" alt="Error sample accuracy by prompt type" class="chart-image">
+                    </div>
+                    <div class="chart-container">
+                        <h4>Japanese vs English Prompts Comparison</h4>
+                        <img src="english_retest.png" alt="Prompt type accuracy comparison" class="chart-image">
+                    </div>
+                </div>
+                <div class="prompt-insights">
+                    <div class="insight-item">
+                        <h4>Chain-of-Thought Effectiveness</h4>
+                        <p>Chain-of-thought prompting achieved 87% accuracy improvement on previously failed samples, demonstrating GPT-4o's latent reasoning capabilities when explicitly guided.</p>
+                    </div>
+                    <div class="insight-item">
+                        <h4>Logic-Focused Instructions</h4>
+                        <p>Prompts emphasizing logical evaluation and belief inconsistency achieved 76% improvement, showing sensitivity to explicit instructional framing.</p>
+                    </div>
+                    <div class="insight-item">
+                        <h4>Language Impact</h4>
+                        <p>English prompts showed similar patterns but with less pronounced gaps, likely due to GPT-4o's extensive English training.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Findings Section -->
+    <section id="findings" class="findings">
+        <div class="container">
+            <h2 class="section-title">Key Findings</h2>
+            <div class="findings-grid">
+                <div class="finding-item">
+                    <div class="finding-icon">🎯</div>
+                    <h3>Performance Variance</h3>
+                    <p>Significant variance in performance across models, with GPT-4o leading at 79.54% accuracy while Claude models underperformed dramatically on BIS despite strong NeuBAROCO results.</p>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-icon">🧠</div>
+                    <h3>Belief Bias Impact</h3>
+                    <p>LLMs struggle disproportionately with belief-inconsistent problems, often overriding logical inference in favor of plausibility heuristics.</p>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-icon">📝</div>
+                    <h3>Prompt Sensitivity</h3>
+                    <p>Strategic prompt design significantly impacts performance, with chain-of-thought and logic-focused instructions dramatically improving accuracy.</p>
+                    </div>
+                <div class="finding-item">
+                    <div class="finding-icon">⚖️</div>
+                    <h3>Scale vs. Reasoning</h3>
+                    <p>Model size alone doesn't guarantee reasoning performance. Training approach and architectural biases are more critical factors.</p>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-icon">🏥</div>
+                    <h3>High-Stakes Implications</h3>
+                    <p>Critical vulnerabilities revealed for deployment in law, healthcare, and scientific research where logical consistency is paramount.</p>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-icon">🔬</div>
+                    <h3>Future Research</h3>
+                    <p>Need for bias-resistant model design and comprehensive evaluation beyond standard benchmarks for reliable AI systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <div class="container">
+            <h2 class="section-title">Resources</h2>
+            <div class="resources-content">
+                <div class="resource-links">
+                    <div class="resource-item">
+                        <h3>📊 Dataset</h3>
+                        <p>Access the complete BIS Reasoning 1.0 dataset</p>
+                        <a href="https://hf.co/datasets/nguyenthanhasia/BIS_Reasoning_v1.0" class="resource-link" target="_blank">Hugging Face Dataset</a>
+                    </div>
+                    <div class="resource-item">
+                        <h3>📄 Research Paper</h3>
+                        <p>Read the full academic paper with detailed methodology and analysis</p>
+                        <a href="https://arxiv.org/pdf/2506.06955" class="resource-link" target="_blank">Download Paper (PDF)</a>
+                    </div>                   
+                </div>
+                
+                <div class="citation">
+                    <h3>Citation</h3>
+                    <div class="citation-box">
+                        <pre><code>@article{nguyen2025bis,
+      title={BIS Reasoning 1.0: The First Large-Scale Japanese Benchmark for Belief-Inconsistent Syllogistic Reasoning}, 
+      author={Ha-Thanh Nguyen and Chaoran Liu and Hirokazu Kiyomaru and Koichi Takeda and Yusuke Miyao and Maki Matsuda and Yusuke Oda and Pontus Stenetorp and Qianying Liu and Su Myat Noe and Hideyuki Tachibana and Kouta Nakayama and Sadao Kurohashi},
+      year={2025},
+      eprint={2506.06955},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2506.06955
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="contact">
+                    <h3>Contact</h3>
+                    <p>For questions about the research or dataset:</p>
+                    <p><strong>Corresponding Author:</strong> Ha-Thanh Nguyen</p>
+                    <p><strong>Email:</strong> nguyenhathanh@nii.ac.jp</p>
+                    <p><strong>Affiliation:</strong> Research and Development Center for Large Language Models, NII, Tokyo, Japan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BIS Reasoning 1.0</h3>
+                    <p>Advancing the evaluation of logical reasoning in Large Language Models</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Research</h4>
+                    <ul>
+                        <li><a href="#abstract">Abstract</a></li>
+                        <li><a href="#dataset">Dataset</a></li>
+                        <li><a href="#results">Results</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://hf.co/datasets/nguyenthanhasia/BIS_Reasoning_v1.0" target="_blank">Dataset</a></li>
+                        <li><a href="https://arxiv.org/pdf/2506.06955" target="_blank">Paper</a></li>
+                        <li><a href="#">Code</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Research and Development Center for Large Language Models, NII. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
